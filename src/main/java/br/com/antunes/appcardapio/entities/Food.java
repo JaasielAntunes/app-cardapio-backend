@@ -7,9 +7,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import java.text.NumberFormat;
-import java.util.Locale;
-
 @Table(name = "foods")
 @Entity(name = "foods")
 @AllArgsConstructor
@@ -26,29 +23,11 @@ public class Food {
 
     private String imgUrl;
 
-    @Column(columnDefinition = "DECIMAL(10,2)")
     private Double price;
-
-    @Transient
-    private String priceFormat;
 
     public Food(FoodRequestDTO data) {
         this.imgUrl = data.imgUrl();
         this.price = data.price();
         this.title = data.title();
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-        this.priceFormat = priceFormat(price);
-    }
-
-    public String getPriceFormat() {
-        return priceFormat;
-    }
-
-    private String priceFormat(double price) {
-        NumberFormat formatBR = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
-        return "R$ " + formatBR.format(price);
     }
 }

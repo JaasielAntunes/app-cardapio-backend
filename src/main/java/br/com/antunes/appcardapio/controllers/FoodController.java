@@ -25,9 +25,15 @@ public class FoodController {
         repo.save(foodData);
     }
 
-    @GetMapping("/listar-todos")
+    @GetMapping("/listar")
     public List<FoodResponseDTO> getAll() {
         List<FoodResponseDTO> foodList = repo.findAll().stream().map(FoodResponseDTO::new).toList();
         return foodList;
     }
+
+//    @GetMapping("/listar")
+//    public ResponseEntity<Page<Food>> getAll(@PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.ASC) Pageable pageable) {
+//        Page<Food> foodPage = repo.findAll(pageable);
+//        return ResponseEntity.status(HttpStatus.OK).body(foodPage); (Listagem para teste exclusivo do backend.)
+//    }
 }
